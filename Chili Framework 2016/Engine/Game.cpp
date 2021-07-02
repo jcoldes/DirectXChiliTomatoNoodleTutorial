@@ -42,21 +42,71 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	const int x = 300;
-	const int y = 200;
+	int x = 400;
+	int y = 300;
 
-	gfx.PutPixel(x - 5, y, 255, 255, 255);	
-	gfx.PutPixel(x - 4, y, 255, 255, 255);
-	gfx.PutPixel(x - 3, y, 255, 255, 255);
-	gfx.PutPixel(x + 3, y, 255, 255, 255);
-	gfx.PutPixel(x + 4, y, 255, 255, 255);
-	gfx.PutPixel(x + 5, y, 255, 255, 255);
-	gfx.PutPixel(x, y - 5, 255, 255, 255);	
-	gfx.PutPixel(x, y - 4, 255, 255, 255);
-	gfx.PutPixel(x, y - 3, 255, 255, 255);
-	gfx.PutPixel(x, y + 3, 255, 255, 255);
-	gfx.PutPixel(x, y + 4, 255, 255, 255);
-	gfx.PutPixel(x, y + 5, 255, 255, 255);
+	int red = 255;
+	int green = 255;
+	int blue = 255;
 
+	bool toggle_rect = false;
+
+	if (wnd.kbd.KeyIsPressed(VK_UP))	y = 250;
+	else if (wnd.kbd.KeyIsPressed(VK_DOWN))	y = 350;
+	else y = 300;
+
+	if (wnd.kbd.KeyIsPressed(VK_LEFT)) x = 350;
+	else if (wnd.kbd.KeyIsPressed(VK_RIGHT)) x = 450;
+	else x = 400;
+
+	if (wnd.kbd.KeyIsPressed('1')) red = red == 255 ? 0 : 255;
+	if (wnd.kbd.KeyIsPressed('2')) green = green == 255 ? 0 : 255;
+	if (wnd.kbd.KeyIsPressed('3')) blue = blue == 255 ? 0 : 255;
+
+	if (wnd.kbd.KeyIsPressed(VK_SPACE)) toggle_rect = !toggle_rect;
+
+
+	if (toggle_rect)
+	{
+		gfx.PutPixel(x + 5, y + 5, red, green, blue);
+		gfx.PutPixel(x + 4, y + 5, red, green, blue);
+		gfx.PutPixel(x + 3, y + 5, red, green, blue);
+		gfx.PutPixel(x + 5, y + 4, red, green, blue);
+		gfx.PutPixel(x + 5, y + 3, red, green, blue);
+
+		gfx.PutPixel(x - 5, y + 5, red, green, blue);
+		gfx.PutPixel(x - 4, y + 5, red, green, blue);
+		gfx.PutPixel(x - 3, y + 5, red, green, blue);
+		gfx.PutPixel(x - 5, y + 4, red, green, blue);
+		gfx.PutPixel(x - 5, y + 3, red, green, blue);
+
+		gfx.PutPixel(x + 5, y - 5, red, green, blue);
+		gfx.PutPixel(x + 4, y - 5, red, green, blue);
+		gfx.PutPixel(x + 3, y - 5, red, green, blue);
+		gfx.PutPixel(x + 5, y - 4, red, green, blue);
+		gfx.PutPixel(x + 5, y - 3, red, green, blue);
+
+		gfx.PutPixel(x - 5, y - 5, red, green, blue);
+		gfx.PutPixel(x - 4, y - 5, red, green, blue);
+		gfx.PutPixel(x - 3, y - 5, red, green, blue);
+		gfx.PutPixel(x - 5, y - 4, red, green, blue);
+		gfx.PutPixel(x - 5, y - 3, red, green, blue);
+	} 
+	else 
+	{
+		gfx.PutPixel(x - 5, y, red, green, blue);
+		gfx.PutPixel(x - 4, y, red, green, blue);
+		gfx.PutPixel(x - 3, y, red, green, blue);
+		gfx.PutPixel(x + 3, y, red, green, blue);
+		gfx.PutPixel(x + 4, y, red, green, blue);
+		gfx.PutPixel(x + 5, y, red, green, blue);
+		gfx.PutPixel(x, y - 5, red, green, blue);
+		gfx.PutPixel(x, y - 4, red, green, blue);
+		gfx.PutPixel(x, y - 3, red, green, blue);
+		gfx.PutPixel(x, y + 3, red, green, blue);
+		gfx.PutPixel(x, y + 4, red, green, blue);
+		gfx.PutPixel(x, y + 5, red, green, blue);
+	}
 	
+
 }
