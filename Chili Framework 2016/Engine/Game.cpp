@@ -21,10 +21,7 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Game::Game( MainWindow& wnd )
-	:
-	wnd( wnd ),
-	gfx( wnd )
+Game::Game( MainWindow& wnd ) : wnd( wnd ), gfx( wnd )
 {
 }
 
@@ -38,35 +35,76 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
+		if (!inhibitUp)
+		{
+			vy -= 1;
+			inhibitUp = true;
+		}
+	}
+	else 
+	{
+		inhibitUp = false;
+	}
+
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		if (!inhibitDown)
+		{
+			vy += 1;
+			inhibitDown = true;
+		}
+	}
+	else
+	{
+		inhibitDown = false;
+	}
+
+	if (wnd.kbd.KeyIsPressed(VK_LEFT)) 
+	{
+		if (!inhibitLeft)
+		{
+			vx -= 1;
+			inhibitLeft = true;
+		}
+	}
+	else
+	{
+		inhibitLeft = false;
+	}
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) 
+	{
+		if (!inhibitRight)
+		{
+			vx += 1;
+			inhibitRight = true;
+		}
+	}
+	else
+	{
+		inhibitRight = false;
+	}
+
+	x = x + vx;
+	y = y + vy;
+
+	if (x < 6) x = 6;
+	if (x > 794) x = 794;
+
+	if (y < 6) y = 6;
+	if (y > 594) y = 594;
+
+	if (wnd.kbd.KeyIsPressed('1')) red = red ? 0 : 255;
+	if (wnd.kbd.KeyIsPressed('2')) green = green ? 0 : 255;
+	if (wnd.kbd.KeyIsPressed('3')) blue = blue ? 0 : 255;
+	toggle_rect = wnd.kbd.KeyIsPressed(VK_SPACE);
 }
 
 void Game::ComposeFrame()
 {
-	int x = 400;
-	int y = 300;
 
-	int red = 255;
-	int green = 255;
-	int blue = 255;
-
-	bool toggle_rect = false;
-
-	if (wnd.kbd.KeyIsPressed(VK_UP))	y = 250;
-	else if (wnd.kbd.KeyIsPressed(VK_DOWN))	y = 350;
-	else y = 300;
-
-	if (wnd.kbd.KeyIsPressed(VK_LEFT)) x = 350;
-	else if (wnd.kbd.KeyIsPressed(VK_RIGHT)) x = 450;
-	else x = 400;
-
-	if (wnd.kbd.KeyIsPressed('1')) red = red == 255 ? 0 : 255;
-	if (wnd.kbd.KeyIsPressed('2')) green = green == 255 ? 0 : 255;
-	if (wnd.kbd.KeyIsPressed('3')) blue = blue == 255 ? 0 : 255;
-
-	if (wnd.kbd.KeyIsPressed(VK_SPACE)) toggle_rect = !toggle_rect;
-
-
-	if (toggle_rect)
+	if (wnd.kbd.KeyIsPressed(VK_SPACE))
 	{
 		gfx.PutPixel(x + 5, y + 5, red, green, blue);
 		gfx.PutPixel(x + 4, y + 5, red, green, blue);
