@@ -43,4 +43,17 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+private:
+	int x = 400;
+	int y = 300;
+	int vx = 0;
+	int vy = 0;
+	int red = 255;
+	int green = 255;
+	int blue = 255;
+	bool toggle_rect = false;
+	bool inhibitUp = false;
+	bool inhibitDown = false;
+	bool inhibitLeft = false;
+	bool inhibitRight = false;
 };
