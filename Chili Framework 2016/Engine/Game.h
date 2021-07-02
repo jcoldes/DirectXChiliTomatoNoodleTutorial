@@ -44,16 +44,10 @@ private:
 	/*  User Variables              */
 	/********************************/
 private:
-	int x = 400;
-	int y = 300;
-	int vx = 0;
-	int vy = 0;
-	int red = 255;
-	int green = 255;
-	int blue = 255;
+	int x_mobile = 400;
+	int y_mobile = 300;
+	int x_fixed = 350;
+	int y_fixed = 450;
+	bool colliding = false;
 	bool toggle_rect = false;
-	bool inhibitUp = false;
-	bool inhibitDown = false;
-	bool inhibitLeft = false;
-	bool inhibitRight = false;
 };
