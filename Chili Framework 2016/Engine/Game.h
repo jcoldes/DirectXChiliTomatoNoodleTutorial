@@ -37,6 +37,10 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
+	void DrawBox(int x, int y, int red, int green, int blue);
+	void DrawCrossHair(int x, int y, int red, int green, int blue);
+	bool OverlapTest(int box0x, int box0y, int box1x, int box1y);
+	int UpdateDir(int input, int delta, int radius, int limit);
 private:
 	MainWindow& wnd;
 	Graphics gfx;
