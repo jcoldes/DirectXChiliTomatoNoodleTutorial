@@ -35,11 +35,13 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (wnd.kbd.KeyIsPressed(VK_UP))	y_mobile = UpdateDir(y_mobile, -1, 5, gfx.ScreenHeight);
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))	y_mobile = UpdateDir(y_mobile, 1, 5, gfx.ScreenHeight);
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))	x_mobile = UpdateDir(x_mobile, -1, 5, gfx.ScreenWidth);
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) x_mobile = UpdateDir(x_mobile, 1, 5, gfx.ScreenWidth);
+	if (wnd.kbd.KeyIsPressed(VK_UP))	y_mobile -= 1;
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))	y_mobile += 1;
+	if (wnd.kbd.KeyIsPressed(VK_LEFT))	x_mobile -= 1;
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) x_mobile += 1;
 
+	y_mobile = ClampScreen(y_mobile, 5, gfx.ScreenHeight);
+	x_mobile = ClampScreen(x_mobile, 5, gfx.ScreenHeight);
 	
 	colliding = OverlapTest(x_fixed, y_fixed, x_mobile, y_mobile);
 }
@@ -117,11 +119,12 @@ bool Game::OverlapTest(int box0x, int box0y, int box1x, int box1y)
 		   bottom_mobile >= top_fixed;
 }
 
-int Game::UpdateDir(int input, int delta, int radius, int limit)
+int Game::ClampScreen(int input, int radius, int limit)
 {
-	if (input - radius + delta <= 0 || 
-		input + radius + delta >= limit) 
-		return input;
+	if (input - radius <= 0)
+		return 0 + radius;
+	else if (input + radius >= limit)
+		return limit - radius;
 	else 
-		return input + delta;
+		return input;
 }
