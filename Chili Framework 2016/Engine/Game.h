@@ -38,8 +38,6 @@ private:
 	/********************************/
 	/*  User Functions              */
 	/********************************/
-	bool PooXInScreen(int x, int width, int vx);
-	bool PooYInScreen(int y, int height, int vy);
 	int ClampScreenX(int x, int width);
 	int ClampScreenY(int y, int height);
 	bool IsColliding(int x0, int y0, int width0, int height0,

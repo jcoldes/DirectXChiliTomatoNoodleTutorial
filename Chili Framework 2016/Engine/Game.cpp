@@ -144,23 +144,6 @@ void Game::ComposeFrame()
 	}
 }
 
-bool Game::PooXInScreen(int x, int width, int vx)
-{
-	const int right = x + width;
-
-	if (x + vx < 0 || right + vx >= gfx.ScreenWidth)
-		return false;
-	else
-		return true;
-}
-bool Game::PooYInScreen(int y, int height, int vy)
-{
-	const int bottom = y + height;
-	if (y + vy < 0 || bottom + vy >= gfx.ScreenHeight)
-		return false;
-	else return true;
-}
-
 int Game::ClampScreenX(int x, int width)
 {
 	const int right = x + width;
